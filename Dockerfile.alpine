@@ -1,0 +1,22 @@
+FROM alpine:3.9.5
+
+ARG SENSU_GO_ASSET_NAME="sensu-tripwire-alpine"
+ARG SENSU_GO_ASSET_VERSION="0.0.1"
+
+ADD create-sensu-asset /usr/bin/create-sensu-asset
+
+RUN apk update && apk upgrade
+RUN apk add bash git
+RUN apk add gcc g++ make automake autoconf lld
+
+RUN cd /tmp && \
+        git clone https://github.com/Tripwire/tripwire-open-source.git
+RUN cd /tmp/tripwire-open-source && \
+        ./configure && \
+        autoreconf -f -i && \
+        ./configure && \
+        make
+RUN cd /tmp/tripwire-open-source/bin && \
+        create-sensu-asset -a $SENSU_GO_ASSET_NAME -b tripwire,twadmin,twprint,twtest,siggen -v $SENSU_GO_ASSET_VERSION -o /tmp
+
+ENTRYPOINT ["bash"]
