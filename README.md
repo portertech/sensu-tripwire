@@ -30,7 +30,7 @@ If you're using an earlier version of sensuctl, you can find the asset on the [B
 From the local path of the sensu-tripwire repository:
 
 ```
-./build
+./build.sh
 ```
 
 ## Additional notes
