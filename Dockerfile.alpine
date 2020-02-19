@@ -10,7 +10,8 @@ RUN apk add bash git
 RUN apk add gcc g++ make automake autoconf lld
 
 RUN cd /tmp && \
-        git clone https://github.com/Tripwire/tripwire-open-source.git
+        git clone https://github.com/Tripwire/tripwire-open-source.git && \
+        git checkout 6e64a9e5b70a909ec439bc5a099e3fcf38c614b0
 RUN cd /tmp/tripwire-open-source && \
         ./configure && \
         autoreconf -f -i && \
