@@ -1,0 +1,11 @@
+---
+description: "#{repo}"
+builds:
+- platform: "alpine"
+  arch: "amd64"
+  asset_filename: "monitoring-plugins-alpine_#{version}_linux_amd64.tar.gz"
+  sha_filename: "#{repo}_#{version}_sha512-checksums.txt"
+  filter:
+  - "entity.system.os == 'linux'"
+  - "entity.system.platform == 'alpine'"
+  - "entity.system.arch == 'amd64'"
