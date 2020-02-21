@@ -14,6 +14,24 @@ Sensu Tripwire is a collection of [Sensu Assets][10], packaging up Tripwire OSS 
 
 ## Usage examples
 
+Initialize a Tripwire database.
+
+```
+tripwire-init.sh
+```
+
+Run a full system check (and initialize the database if missing).
+
+```
+tripwire-check.sh
+```
+
+Run a Tripwire check on a specific web application.
+
+```
+tripwire-check.sh /var/www/*
+```
+
 ## Configuration
 
 ### Asset registration
@@ -35,14 +53,37 @@ From the local path of the sensu-tripwire repository:
 
 ## Additional notes
 
-Managing Tripwire configuration and policy notes.
+This project can be used in combination with the
+[sensu-plugins-tripwire
+project](https://github.com/sensu-plugins/sensu-plugins-tripwire).
+
+Help (as of version 1.2.0).
 
 ```
-./twadmin --create-cfgfile -c /tmp/tw/tw.cfg -e /tmp/tw/twcfg.txt
+Usage: check-tripwire.rb (options)
+    -b, --binary path/to/tripwire    tripwire binary to use, in case you hide yours
+    -f path/to/configfile,           Configuration to use for the check
+        --config-file
+    -c, --critical critical severity Tripwire severity greater than this is a critical error
+    -d path_or_url_to_database. if an http url is supplied the database will be retrieved prior to the check,
+        --database                   Database to use for the check
+    -P, --password PASSWORD          Password to unlock the keyfile
+    -s, --site-key path/to/sitekey   Site key used to decrypt the database that will be used in the validation
+    -w, --warn warning severity      Tripwire severity greater than this is warning
+```
 
-./twadmin --create-polfile -c /tmp/tw/tw.cfg -e /tmp/tw/twpol.txt
+Example run.
 
-./tripwire --init -c /tmp/tw/tw.cfg -e
+```
+check-tripwire.rb --binary tripwire.sh --config-file /tmp/tw/tw.cfg
+```
+
+Register the required assets.
+
+```
+sensuctl asset add portertech/sensu-tripwire
+sensuctl asset add sensu/sensu-ruby-runtime
+sensuctl asset add sensu-plugins/sensu-plugins-tripwire
 ```
 
 ## Contributing

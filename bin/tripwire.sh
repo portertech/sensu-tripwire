@@ -4,7 +4,6 @@ set -e
 DIR=$(dirname "$0")
 
 TWDIR=/tmp/tw
-CFG=$TWDIR/tw.cfg
 DB=$TWDIR/db.twd
 
 if [[ ! -e $DB ]]; then
@@ -12,4 +11,4 @@ if [[ ! -e $DB ]]; then
     $DIR/tripwire-init.sh
 fi
 
-$DIR/tripwire --check -c $CFG -d $DB "$@"
+exec $DIR/tripwire "$@"
