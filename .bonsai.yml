@@ -9,3 +9,11 @@ builds:
   - "entity.system.os == 'linux'"
   - "entity.system.platform == 'alpine'"
   - "entity.system.arch == 'amd64'"
+- platform: "debian"
+  arch: "amd64"
+  asset_filename: "sensu-tripwire-debian_#{version}_linux_amd64.tar.gz"
+  sha_filename: "#{repo}_#{version}_sha512-checksums.txt"
+  filter:
+  - "entity.system.os == 'linux'"
+  - "entity.system.platform_family == 'debian'"
+  - "entity.system.arch == 'amd64'"
