@@ -10,7 +10,10 @@
 
 ## Overview
 
-Sensu Tripwire is a collection of [Sensu Assets][10], packaging up Tripwire OSS (version 2.4.3.7), making it easy to deploy an intrusion detection system (IDS) to systems running the Sensu monitoring Agent.
+Sensu Tripwire is a collection of [Sensu Assets][10], packaging up
+[Tripwire OSS](https://github.com/Tripwire/tripwire-open-source)
+(version 2.4.3.7), making it easy to deploy an intrusion detection
+system (IDS) to systems running the Sensu monitoring Agent.
 
 ## Usage examples
 
