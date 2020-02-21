@@ -14,7 +14,7 @@ PASS=password
 DB=$TWDIR/db.twd
 REP=$TWDIR/report-latest.twr
 
-if [[ -e $DB ]]; then
+if [ -e $DB ]; then
     echo "Tripwire DB already initialized"
     exit 0
 fi

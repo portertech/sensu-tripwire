@@ -1,0 +1,22 @@
+FROM debian:stretch
+
+ARG SENSU_GO_ASSET_NAME="sensu-tripwire-alpine"
+ARG SENSU_GO_ASSET_VERSION="0.0.1"
+
+ADD create-sensu-asset /usr/bin/create-sensu-asset
+ADD bin /tmp/
+
+WORKDIR /tmp/tripwire-open-source
+
+RUN apt-get update
+RUN apt-get install -y bash git
+RUN apt-get install -y build-essential make
+
+RUN git clone https://github.com/Tripwire/tripwire-open-source.git /tmp/tripwire-open-source
+RUN git checkout 6e64a9e5b70a909ec439bc5a099e3fcf38c614b0
+RUN ./configure && make
+RUN cp /tmp/tripwire*.sh bin/
+RUN cd bin && \
+        create-sensu-asset -a $SENSU_GO_ASSET_NAME -b tripwire,twadmin,twprint,twtest,siggen,tripwire-init.sh,tripwire-check.sh,tripwire.sh -v $SENSU_GO_ASSET_VERSION -o /tmp
+
+ENTRYPOINT ["bash"]

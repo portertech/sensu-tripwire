@@ -3,7 +3,7 @@
 export SENSU_GO_ASSET_VERSION=$(git describe --abbrev=0 --tags)
 
 mkdir assets/
-for PLATFORM in alpine;
+for PLATFORM in alpine debian;
 do
   export SENSU_GO_ASSET_FILENAME="sensu-tripwire-${PLATFORM}_${SENSU_GO_ASSET_VERSION}_linux_amd64.tar.gz"
   docker build --no-cache --rm --build-arg "SENSU_GO_ASSET_VERSION=$SENSU_GO_ASSET_VERSION" -t sensu-tripwire-${PLATFORM}:$SENSU_GO_ASSET_VERSION -f Dockerfile.${PLATFORM} .
