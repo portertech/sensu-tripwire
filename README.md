@@ -35,6 +35,16 @@ From the local path of the sensu-tripwire repository:
 
 ## Additional notes
 
+Managing Tripwire configuration and policy notes.
+
+```
+./twadmin --create-cfgfile -c /tmp/tw/tw.cfg -e /tmp/tw/twcfg.txt
+
+./twadmin --create-polfile -c /tmp/tw/tw.cfg -e /tmp/tw/twpol.txt
+
+./tripwire --init -c /tmp/tw/tw.cfg -e
+```
+
 ## Contributing
 
 For more information about contributing to this plugin, see [Contributing][1].

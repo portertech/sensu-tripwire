@@ -4,6 +4,8 @@ ARG SENSU_GO_ASSET_NAME="sensu-tripwire-alpine"
 ARG SENSU_GO_ASSET_VERSION="0.0.1"
 
 ADD create-sensu-asset /usr/bin/create-sensu-asset
+ADD tripwire-init.sh /tmp/tripwire-init.sh
+ADD tripwire-check.sh /tmp/tripwire-check.sh
 
 WORKDIR /tmp/tripwire-open-source
 
@@ -17,7 +19,8 @@ RUN ./configure && \
         autoreconf -f -i && \
         ./configure && \
         make
+RUN cp /tmp/tripwire-*.sh bin/
 RUN cd bin && \
-        create-sensu-asset -a $SENSU_GO_ASSET_NAME -b tripwire,twadmin,twprint,twtest,siggen -v $SENSU_GO_ASSET_VERSION -o /tmp
+        create-sensu-asset -a $SENSU_GO_ASSET_NAME -b tripwire,twadmin,twprint,twtest,siggen,tripwire-init.sh,tripwire-check.sh -v $SENSU_GO_ASSET_VERSION -o /tmp
 
 ENTRYPOINT ["bash"]
