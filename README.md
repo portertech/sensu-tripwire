@@ -1,5 +1,8 @@
 # Sensu Tripwire
 
+[![Bonsai Asset
+Badge](https://img.shields.io/badge/Sensu%20Tripwire-Download%20Me-brightgreen.svg?colorB=89C967&logo=sensu)](https://bonsai.sensu.io/assets/portertech/sensu-tripwire)
+
 ## Table of Contents
 - [Overview](#overview)
 - [Usage examples](#usage-examples)
@@ -14,6 +17,9 @@ Sensu Tripwire is a collection of [Sensu Assets][10], packaging up
 [Tripwire OSS](https://github.com/Tripwire/tripwire-open-source)
 (version 2.4.3.7), making it easy to deploy an intrusion detection
 system (IDS) to systems running the Sensu monitoring Agent.
+
+The Tripwire assets are currently compiled for amd64 systems, on
+Alpine Linux (3.9.5), and Debian (Stretch).
 
 ## Usage examples
 
@@ -48,6 +54,8 @@ If you're using an earlier version of sensuctl, you can find the asset on the [B
 
 ## Building Tripwire Assets
 
+Docker is required to build the Tripwire assets.
+
 From the local path of the sensu-tripwire repository:
 
 ```
@@ -75,18 +83,31 @@ Usage: check-tripwire.rb (options)
     -w, --warn warning severity      Tripwire severity greater than this is warning
 ```
 
-Example run.
-
-```
-check-tripwire.rb --binary tripwire.sh --config-file /tmp/tw/tw.cfg
-```
-
 Register the required assets.
 
 ```
 sensuctl asset add portertech/sensu-tripwire
 sensuctl asset add sensu/sensu-ruby-runtime
 sensuctl asset add sensu-plugins/sensu-plugins-tripwire
+```
+
+Example Sensu check configuration.
+
+``` yaml
+type: CheckConfig
+api_version: core/v2
+metadata:
+  name: tripwire
+spec:
+  command: check-tripwire.rb --binary tripwire.sh --config-file /tmp/tw/tw.cfg
+  interval: 30
+  runtime_assets:
+  - portertech/sensu-tripwire
+  - sensu-plugins/sensu-plugins-tripwire
+  - sensu/sensu-ruby-runtime
+  subscriptions:
+  - linux
+  publish: true
 ```
 
 ## Contributing
