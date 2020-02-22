@@ -1,6 +1,6 @@
 FROM debian:stretch
 
-ARG SENSU_GO_ASSET_NAME="sensu-tripwire-alpine"
+ARG SENSU_GO_ASSET_NAME="sensu-tripwire-debian"
 ARG SENSU_GO_ASSET_VERSION="0.0.1"
 
 ADD create-sensu-asset /usr/bin/create-sensu-asset
