@@ -19,10 +19,10 @@ Sensu Tripwire is a collection of [Sensu Assets][10], packaging up
 system (IDS) to systems running the Sensu monitoring Agent.
 
 The Tripwire assets are currently compiled for amd64 systems, on
-Alpine Linux (3.9.5), and Debian (Stretch). The included wrapper shell
-scripts are opinionated and include Tripwire policy that may be less
-than ideal for your systems. If you run into issues using the assets,
-please [open a GitHub
+Alpine Linux (3.9.5), CentOS (6 and 7), and Debian (Stretch). The
+included wrapper shell scripts are opinionated and include Tripwire
+policy that may be less than ideal for your systems. If you run into
+issues using the assets, please [open a GitHub
 issue](https://github.com/portertech/sensu-tripwire/issues/new)!
 
 ## Usage examples

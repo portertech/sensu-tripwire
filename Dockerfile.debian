@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:stretch as builder
 
 ARG SENSU_GO_ASSET_NAME="sensu-tripwire-debian"
 ARG SENSU_GO_ASSET_VERSION="0.0.1"
