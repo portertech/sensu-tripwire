@@ -1,0 +1,14 @@
+type: CheckConfig
+api_version: core/v2
+metadata:
+  name: check-tripwire
+spec:
+  command: check-tripwire.rb --binary tripwire.sh --config-file /tmp/tw/tw.cfg
+  interval: 30
+  runtime_assets:
+  - portertech/sensu-tripwire
+  - sensu-plugins/sensu-plugins-tripwire
+  - sensu/sensu-ruby-runtime
+  subscriptions:
+  - linux
+  publish: true

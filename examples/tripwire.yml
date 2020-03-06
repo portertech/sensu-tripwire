@@ -1,0 +1,12 @@
+type: CheckConfig
+api_version: core/v2
+metadata:
+  name: tripwire
+spec:
+  command: tripwire-check.sh /usr/bin/*
+  interval: 30
+  runtime_assets:
+  - portertech/sensu-tripwire
+  subscriptions:
+  - linux
+  publish: true
